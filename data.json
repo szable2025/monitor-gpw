@@ -1,0 +1,26 @@
+{
+  "updated": "2025-05-21 09:41",
+  "stocks": [
+    {
+      "name": "Spółka A",
+      "ticker": "SPA",
+      "cz": 10.5,
+      "cwk": 1.2,
+      "dcf": 50.0
+    },
+    {
+      "name": "Spółka B",
+      "ticker": "SPB",
+      "cz": 14.8,
+      "cwk": 1.6,
+      "dcf": 42.3
+    },
+    {
+      "name": "Spółka C",
+      "ticker": "SPC",
+      "cz": 9.3,
+      "cwk": 0.9,
+      "dcf": 35.0
+    }
+  ]
+}
