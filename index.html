@@ -1,49 +1,46 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GPW: mWIG40 & sWIG80 – Monitoring</title>
-  <style>
-    body { font-family: sans-serif; margin: 2rem; }
-    table { border-collapse: collapse; width: 100%; }
-    th, td { padding: 0.5rem; border: 1px solid #ccc; text-align: center; }
-    th { background-color: #f0f0f0; }
-  </style>
+    <meta charset="UTF-8">
+    <title>Monitoring spółek mWIG40 i sWIG80</title>
 </head>
 <body>
-  <h1>Monitoring spółek mWIG40 i sWIG80</h1>
-  <p>Ostatnia aktualizacja: <span id="date"></span></p>
-  <table id="table">
-    <thead>
-      <tr>
-        <th>Spółka</th>
-        <th>Ticker</th>
-        <th>C/Z</th>
-        <th>C/WK</th>
-        <th>Wycena DCF</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-  <script>
-    fetch('data.json')
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById('date').textContent = data.updated;
-        const tbody = document.querySelector('tbody');
-        data.stocks.forEach(stock => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td>${stock.name}</td>
-            <td>${stock.ticker}</td>
-            <td>${stock.cz}</td>
-            <td>${stock.cwk}</td>
-            <td>${stock.dcf}</td>
-          `;
-          tbody.appendChild(row);
-        });
-      });
-  </script>
+    <h1>Monitoring spółek mWIG40 i sWIG80</h1>
+    <p>Ostatnia aktualizacja: <span id="last-update"></span></p>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Spółka</th>
+                <th>Ticker</th>
+                <th>C/Z</th>
+                <th>C/WK</th>
+                <th>Wycena DCF</th>
+            </tr>
+        </thead>
+        <tbody id="data-table">
+            <!-- Dane zostaną załadowane tutaj -->
+        </tbody>
+    </table>
+
+    <script>
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('last-update').textContent = data.last_update;
+                const table = document.getElementById('data-table');
+                data.companies.forEach(company => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${company.name}</td>
+                        <td>${company.ticker}</td>
+                        <td>${company.pe_ratio}</td>
+                        <td>${company.pb_ratio}</td>
+                        <td>${company.dcf_valuation}</td>
+                    `;
+                    table.appendChild(row);
+                });
+            })
+            .catch(error => console.error('Błąd podczas ładowania danych:', error));
+    </script>
 </body>
 </html>
