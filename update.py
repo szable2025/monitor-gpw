@@ -1,17 +1,17 @@
 import json
-import datetime
+from datetime import datetime
 
-# Przykładowe dane — zastąp później prawdziwym scrapingiem (np. z Biznesradar)
-stocks = [
-    {"name": "Spółka A", "ticker": "SPA", "cz": 10.5, "cwk": 1.2, "dcf": 50.0},
-    {"name": "Spółka B", "ticker": "SPB", "cz": 14.8, "cwk": 1.6, "dcf": 42.3},
-    {"name": "Spółka C", "ticker": "SPC", "cz": 9.3,  "cwk": 0.9, "dcf": 35.0},
+# Na razie dane przykładowe - później zastąp je danymi z internetu
+companies_data = [
+    {"name": "Spółka A", "ticker": "SPA", "pe_ratio": 10.5, "pb_ratio": 1.2, "dcf_valuation": 50},
+    {"name": "Spółka B", "ticker": "SPB", "pe_ratio": 14.8, "pb_ratio": 1.6, "dcf_valuation": 42.3},
+    {"name": "Spółka C", "ticker": "SPC", "pe_ratio": 9.3, "pb_ratio": 0.9, "dcf_valuation": 35}
 ]
 
 data = {
-    "updated": datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
-    "stocks": stocks
+    "last_update": datetime.now().strftime("%Y-%m-%d %H:%M"),
+    "companies": companies_data
 }
 
-with open("data.json", "w", encoding="utf-8") as f:
-    json.dump(data, f, ensure_ascii=False, indent=2)
+with open('data.json', 'w', encoding='utf-8') as f:
+    json.dump(data, f, ensure_ascii=False, indent=4)
