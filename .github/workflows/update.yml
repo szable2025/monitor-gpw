@@ -30,4 +30,4 @@ jobs:
         git config user.email "github-actions@github.com"
         git add data.json
         git commit -m "Aktualizacja danych" || echo "Brak zmian"
-        git push
+        git push origin HEAD:main
