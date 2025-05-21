@@ -3,7 +3,7 @@ name: Aktualizacja danych
 on:
   schedule:
     - cron: '0 6 * * *'  # codziennie o 6:00 UTC
-  workflow_dispatch:     # umożliwia ręczne uruchomienie
+  workflow_dispatch:
 
 jobs:
   build:
@@ -18,7 +18,7 @@ jobs:
       with:
         python-version: '3.10'
 
-    - name: Install dependencies (optional)
+    - name: Install dependencies
       run: pip install -r requirements.txt || true
 
     - name: Run script
