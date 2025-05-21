@@ -2,8 +2,8 @@ name: Aktualizacja danych
 
 on:
   schedule:
-    - cron: '0 6 * * *'  # Codziennie o 6:00 rano UTC
-  workflow_dispatch:
+    - cron: '0 6 * * *'  # codziennie o 6:00 UTC
+  workflow_dispatch:     # umożliwia ręczne uruchomienie
 
 jobs:
   build:
@@ -13,21 +13,23 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v3
 
-    - name: Ustaw Python
+    - name: Setup Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.10'
 
-    - name: Zainstaluj zależności
+    - name: Install dependencies (optional)
       run: pip install -r requirements.txt || true
 
-    - name: Uruchom skrypt
+    - name: Run script
       run: python update.py
 
-    - name: Commit i push
+    - name: Commit and push changes
       run: |
         git config user.name "github-actions"
         git config user.email "github-actions@github.com"
         git add data.json
         git commit -m "Aktualizacja danych" || echo "Brak zmian"
         git push origin HEAD:main
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
