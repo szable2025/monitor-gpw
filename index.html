@@ -1,46 +1,56 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <title>Monitoring spółek mWIG40 i sWIG80</title>
+  <meta charset="UTF-8">
+  <title>Monitoring spółek mWIG40 i sWIG80</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    h1 { color: #003366; }
+    table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+    th { background-color: #f2f2f2; }
+    caption { margin-top: 10px; font-style: italic; }
+  </style>
 </head>
 <body>
-    <h1>Monitoring spółek mWIG40 i sWIG80</h1>
-    <p>Ostatnia aktualizacja: <span id="last-update"></span></p>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Spółka</th>
-                <th>Ticker</th>
-                <th>C/Z</th>
-                <th>C/WK</th>
-                <th>Wycena DCF</th>
-            </tr>
-        </thead>
-        <tbody id="data-table">
-            <!-- Dane zostaną załadowane tutaj -->
-        </tbody>
-    </table>
+  <h1>Monitoring spółek mWIG40 i sWIG80</h1>
+  <p><strong>Ostatnia aktualizacja:</strong> <span id="lastUpdate">Ładowanie...</span></p>
 
-    <script>
-        fetch('data.json')
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('last-update').textContent = data.last_update;
-                const table = document.getElementById('data-table');
-                data.companies.forEach(company => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${company.name}</td>
-                        <td>${company.ticker}</td>
-                        <td>${company.pe_ratio}</td>
-                        <td>${company.pb_ratio}</td>
-                        <td>${company.dcf_valuation}</td>
-                    `;
-                    table.appendChild(row);
-                });
-            })
-            .catch(error => console.error('Błąd podczas ładowania danych:', error));
-    </script>
+  <table id="dataTable">
+    <thead>
+      <tr>
+        <th>Spółka</th>
+        <th>Ticker</th>
+        <th>C/Z</th>
+        <th>C/WK</th>
+        <th>Wycena DCF</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    fetch('data.json')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('lastUpdate').textContent = data.last_update;
+        const tableBody = document.querySelector('#dataTable tbody');
+        data.companies.forEach(company => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${company.name}</td>
+            <td>${company.ticker}</td>
+            <td>${company.pe_ratio !== null ? company.pe_ratio : '–'}</td>
+            <td>${company.pb_ratio !== null ? company.pb_ratio : '–'}</td>
+            <td>${company.dcf_valuation !== null ? company.dcf_valuation : '–'}</td>
+          `;
+          tableBody.appendChild(row);
+        });
+      })
+      .catch(error => {
+        document.getElementById('lastUpdate').textContent = 'Błąd ładowania danych';
+        console.error('Błąd ładowania pliku data.json:', error);
+      });
+  </script>
 </body>
 </html>
