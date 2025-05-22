@@ -1,26 +1,26 @@
 {
-    "last_update": "2025-05-22 06:51",
+    "last_update": "2025-05-22 12:38",
     "companies": [
         {
-            "name": "Spółka A",
-            "ticker": "SPA",
-            "pe_ratio": 10.5,
-            "pb_ratio": 1.2,
-            "dcf_valuation": 50
+            "name": "Asseco Poland",
+            "ticker": "ACP",
+            "pe_ratio": null,
+            "pb_ratio": null,
+            "dcf_valuation": null
         },
         {
-            "name": "Spółka B",
-            "ticker": "SPB",
-            "pe_ratio": 14.8,
-            "pb_ratio": 1.6,
-            "dcf_valuation": 42.3
+            "name": "CD Projekt",
+            "ticker": "CDR",
+            "pe_ratio": null,
+            "pb_ratio": null,
+            "dcf_valuation": null
         },
         {
-            "name": "Spółka C",
-            "ticker": "SPC",
-            "pe_ratio": 9.3,
-            "pb_ratio": 0.9,
-            "dcf_valuation": 35
+            "name": "Dino Polska",
+            "ticker": "DNP",
+            "pe_ratio": null,
+            "pb_ratio": null,
+            "dcf_valuation": null
         }
     ]
 }
